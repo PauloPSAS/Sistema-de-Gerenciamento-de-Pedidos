@@ -21,8 +21,8 @@ O estabelecimento enfrenta dificuldades no gerenciamento e controle de pedidos..
 
 ## 🗂 Modelagem
 
-- Esquema Conceitual: [#](#)
-- Esquema Relacional: [#](#)
+- Esquema Conceitual: [modelo/modelo-conceitual.png](modelo/modelo-conceitual.png)
+- Esquema Relacional: [modelo/modelo-relacional.png](modelo/modelo-relacional.png)
 
 ## 🛠 Tecnologias
 

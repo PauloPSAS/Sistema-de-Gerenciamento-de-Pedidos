@@ -51,3 +51,69 @@ JOIN cliente c ON p.id_cliente = c.id
 GROUP BY p.id_cliente, c.id, c.nome
 HAVING SUM(p.valor_total) BETWEEN 130.00 AND 170.00
 ORDER BY soma_pedidos ASC;
+
+-- Exiba o id e o valor dos pedidos com 'entregue' e o nome do cliente. (ROSE)
+SELECT
+    c.nome,
+    p.id,
+    p.valor_total,
+    p.status
+FROM
+    cliente c JOIN pedido p
+    ON c.id = p.id_cliente
+WHERE
+    status LIKE '%Entregue%';
+
+-- Produto mais vendido (ROSE).
+SELECT
+    p.id,
+    p.nome,
+    p.categoria,
+    SUM(i.quantidade_venda) AS total_vendido
+FROM 
+    item_venda i JOIN produto p 
+    ON p.id = i.id_produto
+GROUP BY 
+    p.id, p.nome, p.categoria
+ORDER BY 
+    total_vendido DESC
+LIMIT 1;
+
+-- Mostre os pedidos que não possuem nenhum item vinculado a eles (ROSE).
+SELECT
+    p.id AS id_pedido,
+    p.valor_total,
+    p.status
+FROM 
+    pedido p
+    LEFT JOIN item_venda i ON i.id_pedido = p.id
+WHERE 
+    i.id_pedido IS NULL;
+
+-- Exiba o nome do cliente e o id do pedido mais recente feito por cada cliente (ROSE).
+SELECT
+    c.nome,
+    MAX(p.id) AS ultimo_pedido
+FROM 
+    cliente c JOIN pedido p 
+    ON p.id_cliente = c.id
+GROUP BY c.nome;
+
+-- Mostre os produtos cujo preço é maior que o preço médio de todos os produtos.(ROSE)
+SELECT
+    nome,
+    preco
+FROM produto
+WHERE preco > (
+    SELECT AVG(preco)
+    FROM produto
+)
+ORDER BY preco DESC;
+
+-- Mostre todos os status dos pedidos (Entregue, Em preparo e Cancelado) e o valor médio dos pedidos para cada status. (ROSE)
+SELECT
+    status,
+    AVG(valor_total) AS media_valor
+FROM pedido
+GROUP BY status
+ORDER BY status;
