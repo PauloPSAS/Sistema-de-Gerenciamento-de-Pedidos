@@ -79,7 +79,7 @@ ORDER BY
     total_vendido DESC
 LIMIT 1;
 
--- 12. Mostre os pedidos que não possuem nenhum item vinculado a eles (ROSE).
+-- Mostre os pedidos que não possuem nenhum item vinculado a eles (ROSE).
 SELECT
     p.id AS id_pedido,
     p.valor_total,
@@ -90,7 +90,7 @@ FROM
 WHERE 
     i.id_pedido IS NULL;
 
--- 13. Exiba o nome do cliente e o id do pedido mais recente feito por cada cliente (ROSE).
+-- Exiba o nome do cliente e o id do pedido mais recente feito por cada cliente (ROSE).
 SELECT
     c.nome,
     MAX(p.id) AS ultimo_pedido
@@ -99,7 +99,7 @@ FROM
     ON p.id_cliente = c.id
 GROUP BY c.nome;
 
--- 14. Mostre os produtos cujo preço é maior que o preço médio de todos os produtos.(ROSE)
+-- Mostre os produtos cujo preço é maior que o preço médio de todos os produtos.(ROSE)
 SELECT
     nome,
     preco
@@ -110,7 +110,7 @@ WHERE preco > (
 )
 ORDER BY preco DESC;
 
--- 15. Mostre todos os status dos pedidos (Entregue, Em preparo e Cancelado) e o valor médio dos pedidos para cada status. (ROSE)
+-- Mostre todos os status dos pedidos (Entregue, Em preparo e Cancelado) e o valor médio dos pedidos para cada status. (ROSE)
 SELECT
     status,
     AVG(valor_total) AS media_valor
